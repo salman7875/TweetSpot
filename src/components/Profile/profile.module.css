@@ -62,9 +62,10 @@
 
 .avatar {
   margin-left: 2rem;
-  border-radius: 50%;
   height: 16rem;
   width: 16rem;
+  border-radius: 50%;
+  object-fit: cover;
   position: absolute;
   left: 0;
   bottom: -7rem;

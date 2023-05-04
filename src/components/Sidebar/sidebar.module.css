@@ -1,0 +1,44 @@
+.container {
+  flex: 1;
+  background-color: #000;
+  padding: 2rem 3rem;
+  height: 100vh;
+}
+
+.sidebar {
+}
+
+.lists {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 2rem;
+}
+
+.list {
+  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 19px;
+}
+
+.list > a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.icon {
+  margin-right: 1rem;
+}
+
+a > span {
+  font-size: 1.6rem;
+  margin-left: 1rem;
+}
+
+.list:hover {
+  background-color: #8f8f8f;
+}

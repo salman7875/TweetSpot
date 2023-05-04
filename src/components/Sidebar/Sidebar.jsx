@@ -5,6 +5,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CreateIcon from '@mui/icons-material/Create'
+import SearchIcon from '@mui/icons-material/Search'
 
 import classes from './sidebar.module.css'
 
@@ -27,6 +28,12 @@ const Sidebar = () => {
           </li>
           <li className={classes.list}>
             <a href='#'>
+              <SearchIcon fontSize='large' />
+              <span>Search</span>
+            </a>
+          </li>
+          <li className={classes.list}>
+            <a href='#'>
               <NotificationsNoneIcon fontSize='large' />
               <span>Notification</span>
             </a>
@@ -39,14 +46,14 @@ const Sidebar = () => {
           </li>
           <li className={classes.list}>
             <a href='#'>
-              <AccountCircleIcon fontSize='large' />
-              <span>Profile</span>
+              <CreateIcon fontSize='large' />
+              <span>Create</span>
             </a>
           </li>
           <li className={classes.list}>
             <a href='#'>
-              <CreateIcon fontSize='large' />
-              <span>Create</span>
+              <AccountCircleIcon fontSize='large' />
+              <span>Profile</span>
             </a>
           </li>
         </ul>

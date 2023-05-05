@@ -1,0 +1,80 @@
+.container {
+  flex: 6;
+  background-color: #000;
+}
+
+.wrapper {
+  width: 60rem;
+  border-left: 1px solid #444;
+  border-right: 1px solid #444;
+  height: 100vh;
+}
+
+.search {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #444;
+}
+
+.search > input {
+  width: 80%;
+  padding: 1rem 1.6rem;
+  font-size: 1.6rem;
+  outline: none;
+  border: none;
+  border-radius: 18px;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  padding: 1.4rem 2rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid #444;
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
+  width: 65%;
+}
+
+.imgContainer > img {
+  height: 6rem;
+  width: 6rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.imgContainer > div {
+  margin-left: 2rem;
+}
+
+.imgContainer > div > .bgName {
+  font-size: 2rem;
+  margin-bottom: 0.7rem;
+}
+
+.imgContainer > div > p {
+  font-size: 1.4rem;
+}
+
+.btnFollow {
+  color: #000;
+  background-color: #fff;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 0.8rem 2.4rem;
+  transition: all 1s;
+  border-radius: 21px;
+}
+
+.btnFollow:hover {
+  opacity: 0.7;
+}

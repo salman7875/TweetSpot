@@ -1,7 +1,6 @@
 .container {
   flex: 6;
   background-color: #000;
-  overflow-y: scroll;
 }
 
 .wrapper {
@@ -11,6 +10,16 @@
   border-left: 1px solid #444;
   border-right: 1px solid #444;
   color: #fff;
+  overflow-y: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  --ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .brand {
@@ -46,14 +55,13 @@
 .card {
   padding: 1rem 3rem;
   margin-bottom: 3rem;
+  border-bottom: 1px solid #444;
 }
 
 .cardInfo {
   display: flex;
   align-items: center;
-  border: none;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #444;
 }
 
 .cardInfo > img {
@@ -88,14 +96,12 @@
 .tweet {
   height: auto;
   padding: 1rem 0;
-  border-bottom: 1px solid #444;
   margin-bottom: 1rem;
 }
 
 .tweet > p {
   font-size: 1.6rem;
   line-height: 1.4;
-  border: none;
 }
 
 .action {
@@ -113,15 +119,24 @@
   cursor: pointer;
 }
 
-.like:hover,
-.comment:hover,
+.like:hover {
+  color: rgb(255, 125, 125);
+  text-shadow: 0 1px 2px red;
+}
+
+.comment:hover {
+  color: rgb(114, 114, 243);
+  text-shadow: 0 1px 2px rgb(114, 114, 243);
+}
+
 .share:hover {
-  opacity: 0.8;
+  color: rgb(90, 249, 90);
+  text-shadow: 0 1px 2px yellowgreen;
 }
 
 .like > span,
 .comment > span,
-.share {
+.share > span {
   font-size: 1.4rem;
   margin-left: 0.6rem;
 }

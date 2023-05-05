@@ -6,6 +6,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import CreateIcon from '@mui/icons-material/Create'
 import SearchIcon from '@mui/icons-material/Search'
+import LogoutIcon from '@mui/icons-material/Logout'
 
 import classes from './sidebar.module.css'
 
@@ -54,6 +55,12 @@ const Sidebar = () => {
             <a href='#'>
               <AccountCircleIcon fontSize='large' />
               <span>Profile</span>
+            </a>
+          </li>
+          <li className={classes.list}>
+            <a href='#'>
+              <LogoutIcon fontSize='large' />
+              <span>Logout</span>
             </a>
           </li>
         </ul>

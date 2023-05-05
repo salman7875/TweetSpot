@@ -1,16 +1,25 @@
 .container {
   flex: 6;
   background-color: #000;
-  overflow-y: scroll;
 }
 
 .wrapper {
   width: 600px;
   height: 100vh;
+  color: #fff;
   border: none;
   border-left: 1px solid #444;
   border-right: 1px solid #444;
-  color: #fff;
+  overflow-y: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .nav {
@@ -186,7 +195,7 @@
 }
 
 .cardInfo > img:hover {
-  transform: scale(0.99);
+  transform: scale(0.985);
 }
 
 .cardInfo > p {

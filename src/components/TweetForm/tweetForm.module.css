@@ -1,0 +1,44 @@
+.container {
+  flex: 6;
+  background-color: #000;
+  border-left: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 40rem;
+  min-height: 32rem;
+  background-color: #23232382;
+  border-radius: 9px;
+}
+
+.form > textarea {
+  width: 100%;
+  border: none;
+  background-color: inherit;
+  font-size: 1.8rem;
+  outline: none;
+  color: #fff;
+  padding: 2rem;
+  border-bottom: 1px solid #444;
+}
+
+.form > button {
+  background-color: #50b7f5;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 18px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+  float: right;
+  margin: 1.4rem 2rem 0 0;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.form > button:hover {
+  opacity: 0.6;
+}

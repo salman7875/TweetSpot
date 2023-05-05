@@ -1,4 +1,82 @@
 .container {
-  flex: 5;
+  flex: 4;
   background-color: #000;
+  padding: 2rem 4rem;
+}
+
+.wrapper {
+  min-width: 30rem;
+  background-color: rgba(51, 51, 51, 0.345);
+  border-radius: 9px;
+  min-height: 40rem;
+  padding: 2rem;
+}
+
+.title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.lists {
+  list-style: none;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  padding: 0.2rem 1rem;
+  border-radius: 18px;
+  margin-bottom: 1.4rem;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  background-color: rgba(51, 51, 51, 0.708);
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
+  width: 65%;
+}
+
+.imgContainer > img {
+  height: 6rem;
+  width: 6rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.imgContainer > div {
+  margin-left: 2rem;
+}
+
+.imgContainer > div > .bgName {
+  font-size: 1.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.imgContainer > div > p {
+  font-size: 1rem;
+}
+
+.btnFollow {
+  color: #000;
+  background-color: #fff;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 0.8rem 1.4rem;
+  transition: all 1s;
+  border-radius: 21px;
+}
+
+.btnFollow:hover {
+  opacity: 0.7;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 import classes from './feed.module.css'
@@ -5,6 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import LoopIcon from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import { feedData } from '../../data'
+import { json } from 'react-router-dom'
 
 const Feed = () => {
   return (
@@ -18,8 +20,8 @@ const Feed = () => {
         </div>
 
         {feedData.map(data => (
-          <div className={classes.card}>
-            <div className={classes.cardInfo} key={data.id}>
+          <div className={classes.card} key={data.id}>
+            <div className={classes.cardInfo}>
               <img src={data.avatar} alt={data.username} />
               <p>{data.username}</p>
             </div>
@@ -48,3 +50,12 @@ const Feed = () => {
 }
 
 export default Feed
+
+export const getSuggestedUser = async ({ request, params }) => {
+  const res = await fetch('http://localhost:5000/api/users/')
+  if (!res.ok) {
+    throw json('Something went wrong!')
+  }
+
+  return res
+}

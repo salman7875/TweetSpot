@@ -8,60 +8,66 @@ import CreateIcon from '@mui/icons-material/Create'
 import SearchIcon from '@mui/icons-material/Search'
 import LogoutIcon from '@mui/icons-material/Logout'
 
+import { NavLink, useNavigate } from 'react-router-dom'
+import { logout } from '../../utils/auth'
 import classes from './sidebar.module.css'
 
 const Sidebar = () => {
+  const logoutHandler = () => {
+    logout()
+  }
+
   return (
     <div className={classes.container}>
       <nav className={classes.sidebar}>
         <ul className={classes.lists}>
           <li className={classes.list}>
-            <a href='#'>
+            <NavLink to='/'>
               <TwitterIcon fontSize='large' />
               <span>Twitter</span>
-            </a>
+            </NavLink>
           </li>
           <li className={classes.list}>
-            <a href='#'>
+            <NavLink to='/'>
               <HomeIcon fontSize='large' />
               <span>Home</span>
-            </a>
+            </NavLink>
           </li>
           <li className={classes.list}>
-            <a href='#'>
+            <NavLink to='/search'>
               <SearchIcon fontSize='large' />
               <span>Search</span>
-            </a>
+            </NavLink>
           </li>
           <li className={classes.list}>
-            <a href='#'>
+            <NavLink to='#'>
               <NotificationsNoneIcon fontSize='large' />
               <span>Notification</span>
-            </a>
+            </NavLink>
           </li>
           <li className={classes.list}>
-            <a href='#'>
+            <NavLink to='#'>
               <MailOutlineIcon fontSize='large' />
               <span>Message</span>
-            </a>
+            </NavLink>
           </li>
           <li className={classes.list}>
-            <a href='#'>
+            <NavLink to='/create-tweet'>
               <CreateIcon fontSize='large' />
-              <span>Create</span>
-            </a>
+              <span>Tweet</span>
+            </NavLink>
           </li>
           <li className={classes.list}>
-            <a href='#'>
+            <NavLink to='/profile'>
               <AccountCircleIcon fontSize='large' />
               <span>Profile</span>
-            </a>
+            </NavLink>
           </li>
-          <li className={classes.list}>
-            <a href='#'>
+          <li className={classes.list} onClick={logoutHandler}>
+            <NavLink href='/login'>
               <LogoutIcon fontSize='large' />
               <span>Logout</span>
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

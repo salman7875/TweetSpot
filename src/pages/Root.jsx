@@ -5,7 +5,7 @@ import Suggestion from '../components/Suggestion/Suggestion'
 
 const Root = () => {
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', overflowY: 'hidden' }}>
       <Sidebar />
       <div>
         <Outlet />

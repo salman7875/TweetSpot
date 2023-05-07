@@ -5,10 +5,20 @@ import classes from './feed.module.css'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import LoopIcon from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-import { feedData } from '../../data'
-import { json } from 'react-router-dom'
+import { json, useLoaderData } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getAuthToken } from '../../utils/auth'
 
 const Feed = () => {
+  const [tweets, setTweets] = useState()
+  const data = useLoaderData()
+
+  useEffect(() => {
+    setTweets(data.tweets)
+  }, [data.tweets])
+
+  console.log(tweets)
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -19,8 +29,8 @@ const Feed = () => {
           <h2>Tweets</h2>
         </div>
 
-        {feedData.map(data => (
-          <div className={classes.card} key={data.id}>
+        {tweets?.map(data => (
+          <div className={classes.card} key={data._id}>
             <div className={classes.cardInfo}>
               <img src={data.avatar} alt={data.username} />
               <p>{data.username}</p>
@@ -31,11 +41,11 @@ const Feed = () => {
             <div className={classes.action}>
               <div className={classes.like}>
                 <FavoriteBorderIcon />
-                <span>{data.likes.length}</span>
+                <span>{data?.likes.length}</span>
               </div>
               <div className={classes.comment}>
                 <ChatBubbleOutlineIcon />
-                <span>{data.comments.length}</span>
+                <span>{data?.comments.length}</span>
               </div>
               <div className={classes.share}>
                 <LoopIcon />
@@ -52,9 +62,22 @@ const Feed = () => {
 export default Feed
 
 export const getSuggestedUser = async ({ request, params }) => {
-  const res = await fetch('http://localhost:5000/api/users/')
+  const token = getAuthToken()
+  const res = await fetch('http://localhost:5000/api/users/', {
+    headers: { Authorization: 'Bearer ' + token }
+  })
   if (!res.ok) {
     throw json('Something went wrong!')
+  }
+
+  return res
+}
+
+export const getUserTweets = async ({ request, params }) => {
+  const res = await fetch('http://localhost:5000/api/tweets/')
+
+  if (!res.ok) {
+    throw json({ message: 'No Tweets Found!' }, { status: 500 })
   }
 
   return res

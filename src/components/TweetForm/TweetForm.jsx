@@ -15,7 +15,9 @@ const TweetForm = () => {
         <form className={classes.form}>
           <textarea rows={10} placeholder="What's happening?" />
           <button>Tweet</button>
-          <button onClick={goBack}>Back</button>
+          <button onClick={goBack} type='button'>
+            Back
+          </button>
         </form>
       </div>
     </div>

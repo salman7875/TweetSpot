@@ -1,29 +1,62 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
+import { Form, json, useActionData } from 'react-router-dom'
 import classes from './search.module.css'
+import { useState } from 'react'
 
 const Search = () => {
+  const [user, setUser] = useState()
+  const data = useActionData()
+
+  const searchHandler = () => {
+    setUser(data?.user[0])
+  }
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <div className={classes.search}>
-          <input type='search' placeholder='Search...' />
-        </div>
+        <Form
+          method='post'
+          action='/search'
+          className={classes.search}
+          onSubmit={searchHandler}
+        >
+          <input type='text' name='name' placeholder='Search...' />
+        </Form>
 
-        <div className={classes.result}>
-          <div className={classes.imgContainer}>
-            <img src='https://avatars.githubusercontent.com/u/78205495?v=4' />
-            <div>
-              <p className={classes.bgName}>Amaan Alam</p>
-              <p>@amaan_sk</p>
+        {user && (
+          <div className={classes.result}>
+            <div className={classes.imgContainer}>
+              <img src={user.avatar} />
+              <div>
+                <p className={classes.bgName}>{user.name}</p>
+                <p>@{user.username}</p>
+              </div>
             </div>
+            <a href='#' className={classes.btnFollow}>
+              Follow
+            </a>
           </div>
-          <a href='#' className={classes.btnFollow}>
-            Follow
-          </a>
-        </div>
+        )}
       </div>
     </div>
   )
 }
 
 export default Search
+
+export const searchUser = async ({ request, params }) => {
+  const formdata = await request.formData()
+
+  const userData = {
+    username: formdata.get('name')
+  }
+
+  const res = await fetch('http://localhost:5000/api/find', {
+    method: 'POST',
+    body: JSON.stringify(userData),
+    headers: { 'Content-Type': 'application/json' }
+  })
+
+  return res
+}

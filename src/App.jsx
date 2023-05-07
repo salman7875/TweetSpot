@@ -1,26 +1,25 @@
 /* eslint-disable no-unused-vars */
-import Feed, { getSuggestedUser } from './components/Feed/Feed'
+import Feed, { getSuggestedUser, getUserTweets } from './components/Feed/Feed'
 import Login, { loginUser } from './components/Login/Login'
 import Profile, { getCurrentProfile } from './components/Profile/Profile'
 import Register, { registerUserAction } from './components/Register/Register'
-import Search from './components/Search/Search'
+import Search, { searchUser } from './components/Search/Search'
 import TweetForm from './components/TweetForm/TweetForm'
+import Root from './pages/Root'
+import Error from './pages/Error'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Root from './pages/Root'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <Error />,
     loader: getSuggestedUser,
     id: 'root',
     children: [
-      {
-        index: true,
-        element: <Feed />
-      },
-      { path: 'search', element: <Search /> },
+      { index: true, element: <Feed />, loader: getUserTweets },
+      { path: 'search', element: <Search />, action: searchUser },
       { path: 'profile', element: <Profile />, loader: getCurrentProfile }
     ]
   },

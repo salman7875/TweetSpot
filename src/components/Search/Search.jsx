@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import { Form, json, useActionData } from 'react-router-dom'
+import { Form, Link, json, useActionData } from 'react-router-dom'
 import classes from './search.module.css'
 import { useState } from 'react'
 
@@ -33,9 +33,9 @@ const Search = () => {
                 <p>@{user.username}</p>
               </div>
             </div>
-            <a href='#' className={classes.btnFollow}>
+            <Link to={`/users/${user._id}`} className={classes.btnFollow}>
               Follow
-            </a>
+            </Link>
           </div>
         )}
       </div>

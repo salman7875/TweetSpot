@@ -5,30 +5,39 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import LoopIcon from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-import classes from './profile.module.css'
-import { Link, json, useLoaderData } from 'react-router-dom'
-import { getAuthToken } from '../../utils/auth'
+import classes from './SingleUser.module.css'
+import { json, useLoaderData } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { getAuthToken } from '../../utils/auth'
 
-const Profile = () => {
-  const [tweets, setTweets] = useState([])
-  const currentUser = useLoaderData()
+const SingleUser = () => {
+  const [tweets, setTweets] = useState()
+  const [followed, setFollowed] = useState(false)
+  const data = useLoaderData()
+  const currentUser = data.user
 
   useEffect(() => {
-    const fetchTweets = async () => {
-      const token = getAuthToken()
-
-      const res = await fetch('http://localhost:5000/api/tweets/current', {
-        headers: { Authorization: 'Bearer ' + token }
-      })
-
+    const getTweets = async id => {
+      const res = await fetch('http://localhost:5000/api/tweets/' + id)
       const data = await res.json()
       setTweets(data.tweets)
     }
-    fetchTweets()
-  }, [])
+    getTweets(currentUser._id)
+  }, [currentUser._id])
 
-  console.log(tweets)
+  const followHandler = async id => {
+    const token = getAuthToken()
+    const res = await fetch('http://localhost:5000/api/users/follow/' + id, {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token }
+    })
+
+    if (!res.ok) {
+      throw json({ message: 'Something Went Wrong!' }, { status: 500 })
+    } else {
+      console.log('Done')
+    }
+  }
 
   return (
     <div className={classes.container}>
@@ -40,7 +49,7 @@ const Profile = () => {
           />
           <div>
             <h2>{currentUser.name}</h2>
-            <p>{currentUser.tweets.length} Tweets</p>
+            <p>{currentUser.tweets?.length} Tweets</p>
           </div>
         </div>
         <div className={classes.userBg}>
@@ -52,8 +61,12 @@ const Profile = () => {
           />
         </div>
         <div className={classes.user}>
-          <a href='#' className={classes.editProfile}>
-            Edit Profile
+          <a
+            href='#'
+            className={classes.editProfile}
+            onClick={() => followHandler(currentUser._id)}
+          >
+            {followed ? 'Follow' : 'Unfollow'}
           </a>
           <div className={classes.userInfo}>
             <h3>{currentUser.name}</h3>
@@ -67,14 +80,14 @@ const Profile = () => {
             <p className={classes.bio}>{currentUser.bio}</p>
 
             <div className={classes.followings}>
-              <Link to='/followings'>
-                {currentUser.followings.length}
+              <a href='#'>
+                {currentUser.followings?.length}
                 <span>Followings</span>
-              </Link>
-              <Link to='/followers'>
-                {currentUser.followers.length}
+              </a>
+              <a href='#'>
+                {currentUser.followers?.length}
                 <span>Followers</span>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -83,8 +96,8 @@ const Profile = () => {
           <div className={classes.head}>
             <h2>Tweet</h2>
           </div>
-          {tweets.map(tweet => (
-            <div className={classes.tweetCard} key={tweet._d}>
+          {tweets?.map(tweet => (
+            <div className={classes.tweetCard} key={tweet._id}>
               <div className={classes.cardInfo}>
                 <img src={currentUser.avatar} alt={currentUser.name} />
                 <p>{currentUser.name}</p>
@@ -114,14 +127,11 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default SingleUser
 
-export const getCurrentProfile = async ({ request, params }) => {
-  const token = getAuthToken()
-
-  const res = await fetch('http://localhost:5000/api/current', {
-    headers: { Authorization: 'Bearer ' + token }
-  })
+export const getSingleUser = async ({ request, params }) => {
+  const id = params.id
+  const res = await fetch('http://localhost:5000/api/users/' + id)
 
   if (!res.ok) {
     throw json({ message: 'Something went wrong!' }, { status: 500 })

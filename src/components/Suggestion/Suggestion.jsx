@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import { useRouteLoaderData } from 'react-router-dom'
+import { Link, json, useRouteLoaderData } from 'react-router-dom'
 import classes from './suggestion.module.css'
 
 const Suggestion = () => {
@@ -21,9 +21,9 @@ const Suggestion = () => {
                     <p>@{data.username}</p>
                   </div>
                 </div>
-                <a href='#' className={classes.btnFollow}>
+                <Link to={`/users/${data._id}`} className={classes.btnFollow}>
                   Follow
-                </a>
+                </Link>
               </div>
             </li>
           ))}

@@ -17,7 +17,25 @@ const Feed = () => {
     setTweets(data.tweets)
   }, [data.tweets])
 
-  console.log(tweets)
+  const likeHandler = async id => {
+    try {
+      const token = getAuthToken()
+      const res = await fetch('http://localhost:5000/api/tweets/action/' + id, {
+        method: 'POST',
+        header: { Authorization: 'Bearer ' + token }
+      })
+
+      console.log('DFONE')
+
+      if (!res.ok) {
+        throw json({ message: 'Something went wrong!' }, { status: 500 })
+      } else {
+        console.log('DOne')
+      }
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
   return (
     <div className={classes.container}>
@@ -41,7 +59,9 @@ const Feed = () => {
             <div className={classes.action}>
               <div className={classes.like}>
                 <FavoriteBorderIcon />
-                <span>{data?.likes.length}</span>
+                <span onClick={() => likeHandler(data._id)}>
+                  {data.likes?.length}
+                </span>
               </div>
               <div className={classes.comment}>
                 <ChatBubbleOutlineIcon />

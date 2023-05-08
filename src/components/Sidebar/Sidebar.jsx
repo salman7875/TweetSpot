@@ -9,18 +9,41 @@ import SearchIcon from '@mui/icons-material/Search'
 import LogoutIcon from '@mui/icons-material/Logout'
 
 import { NavLink, useNavigate } from 'react-router-dom'
-import { logout } from '../../utils/auth'
+import { getAuthToken, logout } from '../../utils/auth'
 import classes from './sidebar.module.css'
+import { useEffect, useState } from 'react'
 
 const Sidebar = () => {
+  const [token, setToken] = useState()
   const logoutHandler = () => {
     logout()
   }
+
+  useEffect(() => {
+    const isToken = getAuthToken()
+    setToken(isToken)
+  }, [])
 
   return (
     <div className={classes.container}>
       <nav className={classes.sidebar}>
         <ul className={classes.lists}>
+          {!token && (
+            <>
+              <li className={classes.list}>
+                <NavLink to='/register'>
+                  <TwitterIcon fontSize='large' />
+                  <span>Register</span>
+                </NavLink>
+              </li>
+              <li className={classes.list}>
+                <NavLink to='/login'>
+                  <TwitterIcon fontSize='large' />
+                  <span>Login</span>
+                </NavLink>
+              </li>
+            </>
+          )}
           <li className={classes.list}>
             <NavLink to='/'>
               <TwitterIcon fontSize='large' />

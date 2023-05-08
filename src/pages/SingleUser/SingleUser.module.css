@@ -1,0 +1,255 @@
+.container {
+  flex: 6;
+  background-color: #000;
+}
+
+.wrapper {
+  width: 600px;
+  height: 100vh;
+  color: #fff;
+  border: none;
+  border-left: 1px solid #444;
+  border-right: 1px solid #444;
+  overflow-y: scroll;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.nav {
+  height: 7rem;
+  display: flex;
+  padding: 0 2rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.iconBack {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  transition: all 0.5s;
+}
+
+.iconBack:hover {
+  background-color: #666;
+}
+
+.nav > div {
+  margin-left: 3.6rem;
+}
+
+.nav > div > h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.nav > div > p {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #888;
+}
+
+/* USER */
+.userBg {
+  background-color: burlywood;
+  height: 20rem;
+  position: relative;
+}
+
+.bgImg {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.avatar {
+  margin-left: 2rem;
+  height: 16rem;
+  width: 16rem;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  bottom: -7rem;
+}
+
+/* USER-INFO */
+.user {
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+.editProfile {
+  text-decoration: none;
+  color: #fff;
+  float: right;
+  padding: 1rem 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: 1px solid #fff;
+  transition: all 0.5s;
+  border-radius: 19px;
+}
+
+.editProfile:hover {
+  background-color: #cac3c320;
+}
+
+.userInfo {
+  margin-top: 8rem;
+}
+
+.userInfo > h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.userInfo > p {
+  font-size: 1.4rem;
+  color: #888;
+}
+
+.date {
+  margin-top: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.date > span {
+  font-size: 1.6rem;
+  margin-left: 1rem;
+}
+
+.bio {
+  font-size: 1.8rem !important;
+  color: #ffffffcd !important;
+  margin: 2rem 0;
+}
+
+.followings {
+  margin-top: 1.4rem;
+}
+
+.followings > a {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.followings > a > span {
+  color: #666;
+  margin-right: 1.6rem;
+  margin-left: 0;
+}
+
+.followings > a:hover {
+  text-decoration: underline;
+}
+
+/* USER Tweet */
+.head {
+  height: 4rem;
+  border: none;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.head > h2 {
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+
+.tweetCard {
+  padding: 0 3rem 2rem 3rem;
+  margin-bottom: 3rem;
+  border: none;
+  border-bottom: 1px solid #444;
+}
+
+.cardInfo {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding-bottom: 1rem;
+}
+
+.cardInfo > img {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.cardInfo > img:hover {
+  transform: scale(0.985);
+}
+
+.cardInfo > p {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0 0.7rem 0 1rem;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.cardInfo > p:hover {
+  text-decoration: underline;
+}
+
+.cardInfo > span {
+  font-size: 1.2rem;
+}
+
+.tweet {
+  height: auto;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.tweet > p {
+  font-size: 1.6rem;
+  line-height: 1.4;
+  border: none;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.like,
+.comment,
+.share {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.like:hover,
+.comment:hover,
+.share:hover {
+  opacity: 0.8;
+}
+
+.like > span,
+.comment > span,
+.share {
+  font-size: 1.4rem;
+  margin-left: 0.6rem;
+}

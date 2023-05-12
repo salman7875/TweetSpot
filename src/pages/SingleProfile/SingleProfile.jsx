@@ -4,7 +4,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import LoopIcon from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import classes from '../../components/Profile/profile.module.css'
 
 const SingleProfile = () => {

@@ -1,13 +1,28 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import { Form, json, redirect, useLoaderData } from 'react-router-dom'
+import { Form, useLoaderData, useNavigate } from 'react-router-dom'
 import classes from './login.module.css'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../../context/authContext'
 
 const Login = () => {
-  const user = useLoaderData()
+  const navigate = useNavigate()
+  const [inputs, setInputs] = useState({ username: '', password: '' })
+  const { auth } = useContext(AuthContext)
 
-  const loginHandler = () => {
-    console.log(user)
+  const jumpToRegister = () => {
+    navigate('/register')
+  }
+
+  const loginHandler = async e => {
+    e.preventDefault()
+
+    await auth('login', inputs)
+    navigate('/')
+  }
+
+  const changeHandler = e => {
+    setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   return (
@@ -21,14 +36,22 @@ const Login = () => {
               type='text'
               name='username'
               placeholder='Enter your username...'
+              onChange={changeHandler}
             />
           </div>
           <div className={classes.control}>
             <label>Password: </label>
-            <input type='password' name='password' placeholder='******' />
+            <input
+              type='password'
+              name='password'
+              placeholder='******'
+              onChange={changeHandler}
+            />
           </div>
           <div className={classes.action}>
-            <button className={classes.register}>Register?</button>
+            <button className={classes.register} onClick={jumpToRegister}>
+              Register?
+            </button>
             <button className={classes.login} onClick={loginHandler}>
               Login
             </button>
@@ -40,29 +63,3 @@ const Login = () => {
 }
 
 export default Login
-
-export const loginUser = async ({ request, params }) => {
-  const formdata = await request.formData()
-
-  const authData = {
-    username: formdata.get('username'),
-    password: formdata.get('password')
-  }
-
-  const res = await fetch('http://localhost:5000/api/login', {
-    method: 'POST',
-    body: JSON.stringify(authData),
-    headers: { 'Content-Type': 'application/json' }
-  })
-
-  if (!res.ok) {
-    throw json({ message: 'Something Went Wrong!' }, { status: 500 })
-  }
-
-  const data = await res.json()
-  console.log(data)
-  const token = data.token
-  localStorage.setItem('token', token)
-
-  return redirect('/')
-}

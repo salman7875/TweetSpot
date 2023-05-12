@@ -1,16 +1,13 @@
-/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import LoopIcon from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-import classes from './SingleUser.module.css'
-import { json, useLoaderData } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { getAuthToken } from '../../utils/auth'
+import { Link } from 'react-router-dom'
+import classes from '../../components/Profile/profile.module.css'
 
-const SingleUser = () => {
+const SingleProfile = () => {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -21,7 +18,7 @@ const SingleUser = () => {
           />
           <div>
             <h2>currentUser.name</h2>
-            <p>currentUser.tweets?.length Tweets</p>
+            <p>currentUser.tweets.length Tweets</p>
           </div>
         </div>
         <div className={classes.userBg}>
@@ -45,17 +42,17 @@ const SingleUser = () => {
               <span>Joined September 2022</span>
             </div>
 
-            <p className={classes.bio}>bio</p>
+            <p className={classes.bio}>currentUser.bio</p>
 
             <div className={classes.followings}>
-              <a href='#'>
-                currentUser.followings?.length
+              <Link to='/followings'>
+                currentUser.followings.length
                 <span>Followings</span>
-              </a>
-              <a href='#'>
-                currentUser.followers?.length
+              </Link>
+              <Link to='/followers'>
+                currentUser.followers.length
                 <span>Followers</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -64,9 +61,10 @@ const SingleUser = () => {
           <div className={classes.head}>
             <h2>Tweet</h2>
           </div>
+
           <div className={classes.tweetCard}>
             <div className={classes.cardInfo}>
-              <img src='currentUser.avatar' alt='currentUser.name' />
+              <img src='currentUser.avatar' />
               <p>currentUser.name</p>
             </div>
             <div className={classes.tweet}>
@@ -93,4 +91,4 @@ const SingleUser = () => {
   )
 }
 
-export default SingleUser
+export default SingleProfile

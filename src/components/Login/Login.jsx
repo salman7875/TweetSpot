@@ -16,7 +16,6 @@ const Login = () => {
 
   const loginHandler = async e => {
     e.preventDefault()
-
     await auth('login', inputs)
     navigate('/')
   }

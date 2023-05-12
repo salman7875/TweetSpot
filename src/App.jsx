@@ -16,8 +16,7 @@ import { useContext, useEffect } from 'react'
 import { AuthContext } from './context/authContext'
 
 const App = () => {
-  const { currentUser } = useContext(AuthContext)
-  console.log(currentUser)
+  const { token } = useContext(AuthContext)
 
   const router = createBrowserRouter([
     {
@@ -29,8 +28,8 @@ const App = () => {
         { path: 'search', element: <Search /> },
         { path: 'profile', element: <Profile /> },
         { path: 'users/:id', element: <SingleUser /> },
-        { path: 'followings', element: <ListFollowers /> },
-        { path: 'followers', element: <ListFollowers /> }
+        { path: ':id/followings', element: <ListFollowers /> },
+        { path: ':id/followers', element: <ListFollowers /> }
       ]
     },
     { path: '/create-tweet', element: <TweetForm /> },

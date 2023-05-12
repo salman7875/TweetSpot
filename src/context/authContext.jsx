@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 export const AuthContext = createContext()
 
@@ -9,9 +8,7 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem('user')) || false
   )
-  const [token, setToken] = useState(
-    JSON.stringify(localStorage.getItem('token')) || false
-  )
+  const [token, setToken] = useState(localStorage.getItem('token') || null)
 
   const auth = async (mode, inputs) => {
     const res = await fetch(`http://localhost:5000/api/${mode}`, {
@@ -22,12 +19,9 @@ export const AuthContextProvider = ({ children }) => {
     const data = await res.json()
     setCurrentUser(data.user)
     setToken(data.token)
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('user', JSON.stringify(data.user))
   }
-
-  useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(currentUser))
-    localStorage.setItem('token', JSON.stringify(token))
-  }, [currentUser, token])
 
   const logout = () => {
     localStorage.removeItem('user')
@@ -35,7 +29,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ currentUser, auth }}>
+    <AuthContext.Provider value={{ currentUser, auth, token, logout }}>
       {children}
     </AuthContext.Provider>
   )

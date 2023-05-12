@@ -2,27 +2,46 @@
 /* eslint-disable no-unused-vars */
 import { Link } from 'react-router-dom'
 import classes from './suggestion.module.css'
+import { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../context/authContext'
 
 const Suggestion = () => {
+  const [suggested, setSuggested] = useState()
+  const { currentUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    const fetchSuggestUser = async () => {
+      const res = await fetch('http://localhost:5000/api/users')
+      const data = await res.json()
+      const users = data.users.filter(
+        user => user.username !== currentUser.username
+      )
+      setSuggested(users)
+    }
+    fetchSuggestUser()
+  }, [currentUser.username])
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <h2 className={classes.title}>Suggestions</h2>
         <ul className={classes.lists}>
-          <li className={classes.list}>
-            <div className={classes.listItem}>
-              <div className={classes.imgContainer}>
-                <img src='data.avatar' alt='data.name' />
-                <div>
-                  <p className={classes.bgName}>data.name</p>
-                  <p>@data.username</p>
+          {suggested?.map(user => (
+            <li className={classes.list} key={user._id}>
+              <div className={classes.listItem}>
+                <div className={classes.imgContainer}>
+                  <img src={user.avatar} alt={user.name} />
+                  <div>
+                    <p className={classes.bgName}>{user.name}</p>
+                    <p>@{user.username}</p>
+                  </div>
                 </div>
+                <Link to={`/users/${user._id}`} className={classes.btnFollow}>
+                  Follow
+                </Link>
               </div>
-              <Link to={`/users/`} className={classes.btnFollow}>
-                Follow
-              </Link>
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

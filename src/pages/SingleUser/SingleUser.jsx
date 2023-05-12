@@ -6,89 +6,163 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import LoopIcon from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import classes from './SingleUser.module.css'
-import { json, useLoaderData } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { getAuthToken } from '../../utils/auth'
+import { Link, useLocation } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { Types } from 'mongoose'
+import { AuthContext } from '../../context/authContext'
 
 const SingleUser = () => {
+  const location = useLocation()
+  const userId = location.pathname.split('/')[2]
+  const [user, setUser] = useState()
+  const [tweets, setTweets] = useState()
+  const [follow, setFollowed] = useState(false)
+  const { token } = useContext(AuthContext)
+
+  // GET USER
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch('http://localhost:5000/api/users/' + userId)
+      const data = await res.json()
+      setUser(data.user)
+    }
+    fetchUser()
+  }, [userId])
+
+  // GET USER TWEET
+  useEffect(() => {
+    const fetchTweets = async () => {
+      const res = await fetch('http://localhost:5000/api/tweets/' + userId)
+      const data = await res.json()
+      setTweets(data.tweets)
+    }
+    fetchTweets()
+  }, [userId])
+
+  const followHandler = async () => {
+    console.log(userId)
+    const res = await fetch(
+      'http://localhost:5000/api/users/follow/' + userId,
+      {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + token }
+      }
+    )
+    if (res.ok) {
+      console.log('Followed')
+    } else {
+      console.log('Something went wrong!')
+    }
+  }
+
+  const likeHandler = async id => {
+    const res = await fetch('http://localhost:5000/api/tweets/action/' + id, {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token }
+    })
+    if (res.ok) {
+      console.log('Liked')
+    }
+  }
+
   return (
     <div className={classes.container}>
-      <div className={classes.wrapper}>
-        <div className={classes.nav}>
-          <KeyboardBackspaceIcon
-            fontSize='large'
-            className={classes.iconBack}
-          />
-          <div>
-            <h2>currentUser.name</h2>
-            <p>currentUser.tweets?.length Tweets</p>
-          </div>
-        </div>
-        <div className={classes.userBg}>
-          <img src='currentUser.bgImg' alt='bg-img' className={classes.bgImg} />
-          <img
-            src='currentUser.avatar'
-            alt='avatar'
-            className={classes.avatar}
-          />
-        </div>
-        <div className={classes.user}>
-          <a href='#' className={classes.editProfile}>
-            Follow
-          </a>
-          <div className={classes.userInfo}>
-            <h3>currentUser.name</h3>
-            <p>@currentUser.username</p>
-
-            <div className={classes.date}>
-              <CalendarMonthIcon fontSize='medium' color='#555' />
-              <span>Joined September 2022</span>
-            </div>
-
-            <p className={classes.bio}>bio</p>
-
-            <div className={classes.followings}>
-              <a href='#'>
-                currentUser.followings?.length
-                <span>Followings</span>
-              </a>
-              <a href='#'>
-                currentUser.followers?.length
-                <span>Followers</span>
-              </a>
+      {user && (
+        <div className={classes.wrapper}>
+          <div className={classes.nav}>
+            <KeyboardBackspaceIcon
+              fontSize='large'
+              className={classes.iconBack}
+            />
+            <div>
+              <h2>{user.name}</h2>
+              <p>{user.tweets?.length} Tweets</p>
             </div>
           </div>
-        </div>
-
-        <div className={classes.userTweet}>
-          <div className={classes.head}>
-            <h2>Tweet</h2>
+          <div className={classes.userBg}>
+            <img src={user.bgImg} alt='bg-img' className={classes.bgImg} />
+            <img src={user.avatar} alt='avatar' className={classes.avatar} />
           </div>
-          <div className={classes.tweetCard}>
-            <div className={classes.cardInfo}>
-              <img src='currentUser.avatar' alt='currentUser.name' />
-              <p>currentUser.name</p>
-            </div>
-            <div className={classes.tweet}>
-              <p>tweet.content</p>
-            </div>
-            <div className={classes.action}>
-              <div className={classes.like}>
-                <FavoriteBorderIcon />
-                <span>tweet.likes.length</span>
+          <div className={classes.user}>
+            <a href='#' className={classes.editProfile} onClick={followHandler}>
+              {follow ? 'Unfollow' : 'Follow'}
+            </a>
+            <div className={classes.userInfo}>
+              <h3>{user.name}</h3>
+              <p>@{user.username}</p>
+
+              <div className={classes.date}>
+                <CalendarMonthIcon fontSize='medium' color='#555' />
+                <span>Joined September 2022</span>
               </div>
-              <div className={classes.comment}>
-                <ChatBubbleOutlineIcon />
-                <span>tweet.comments.length</span>
-              </div>
-              <div className={classes.share}>
-                <LoopIcon />
-                <span>1</span>
+
+              <p className={classes.bio}>{user.bio}</p>
+
+              <div className={classes.followings}>
+                <Link to={`/${user._id.toString()}/followings`}>
+                  {user.followings?.length}
+                  <span>Followings</span>
+                </Link>
+                <Link to={`/${user._id.toString()}/followers`}>
+                  {user.followers?.length}
+                  <span>Followers</span>
+                </Link>
               </div>
             </div>
           </div>
+
+          {tweets &&
+            tweets?.map(tweet => (
+              <div className={classes.userTweet} key={tweet._id}>
+                <div className={classes.head}>
+                  <h2>Tweet</h2>
+                </div>
+                <div className={classes.tweetCard}>
+                  <div className={classes.cardInfo}>
+                    <img src={user.avatar} alt={user.name} />
+                    <p>{user.name}</p>
+                  </div>
+                  <div className={classes.tweet}>
+                    <p>{tweet.content}</p>
+                  </div>
+                  <div className={classes.action}>
+                    <div className={classes.like}>
+                      <FavoriteBorderIcon
+                        onClick={() => likeHandler(tweet._id)}
+                      />
+                      <span>{tweet.likes.length}</span>
+                    </div>
+                    <div className={classes.comment}>
+                      <ChatBubbleOutlineIcon />
+                      <span>{tweet.comments.length}</span>
+                    </div>
+                    <div className={classes.share}>
+                      <LoopIcon />
+                      <span>1</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          {tweets?.length < 1 && (
+            <>
+              <div className={classes.head}>
+                <h2>Tweet</h2>
+              </div>
+              <h1
+                style={{
+                  textAlign: 'center',
+                  fontSize: '3rem',
+                  fontWeight: '300',
+                  marginBottom: '2rem'
+                }}
+              >
+                No Tweet Posted!
+              </h1>
+            </>
+          )}
         </div>
-      </div>
+      )}
     </div>
   )
 }

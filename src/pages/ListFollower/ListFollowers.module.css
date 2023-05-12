@@ -5,6 +5,7 @@
 
 .wrapper {
   width: 60rem;
+  padding-top: 2rem;
   border-left: 1px solid #444;
   border-right: 1px solid #444;
   height: 100vh;
@@ -15,6 +16,7 @@
 }
 
 .listItem {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,14 +27,14 @@
   cursor: pointer;
 }
 
-.listItem:hover {
-  background-color: rgba(51, 51, 51, 0.708);
-}
-
 .imgContainer {
   display: flex;
   align-items: center;
   width: 65%;
+}
+
+.listItem:hover {
+  background-color: rgb(75, 23, 127);
 }
 
 .imgContainer > img {
@@ -68,5 +70,6 @@
 }
 
 .btnFollow:hover {
-  opacity: 0.7;
+  background-color: rgb(39, 6, 73);
+  color: #fff;
 }

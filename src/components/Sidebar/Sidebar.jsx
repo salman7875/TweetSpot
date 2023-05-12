@@ -8,19 +8,25 @@ import CreateIcon from '@mui/icons-material/Create'
 import SearchIcon from '@mui/icons-material/Search'
 import LogoutIcon from '@mui/icons-material/Logout'
 
-import { NavLink } from 'react-router-dom'
-import classes from './sidebar.module.css'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/authContext'
+import classes from './sidebar.module.css'
 
 const Sidebar = () => {
-  const { currentUser } = useContext(AuthContext)
+  const { token, logout } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const logoutHandler = () => {
+    logout()
+    navigate('/login')
+  }
 
   return (
     <div className={classes.container}>
       <nav className={classes.sidebar}>
         <ul className={classes.lists}>
-          {!currentUser && (
+          {!token && (
             <>
               <li className={classes.list}>
                 <NavLink to='/register'>
@@ -78,12 +84,14 @@ const Sidebar = () => {
               <span>Profile</span>
             </NavLink>
           </li>
-          <li className={classes.list}>
-            <NavLink href='/login'>
-              <LogoutIcon fontSize='large' />
-              <span>Logout</span>
-            </NavLink>
-          </li>
+          {token && (
+            <li className={classes.list} onClick={logoutHandler}>
+              <NavLink href='/login'>
+                <LogoutIcon fontSize='large' />
+                <span>Logout</span>
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </div>

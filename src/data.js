@@ -39,3 +39,14 @@ export const feedData = [
     comments: ['u1', 'u3']
   }
 ]
+
+export const tweets = [
+  {
+    id: '1',
+    avatar: 'https://avatars.githubusercontent.com/u/78205495?v=4',
+    name: 'Scout Op',
+    username: 'scout-op',
+    content:
+      '🌎💻 A friend stealth startup is hiring for paid Product Designer interns! Are you obsessed with UI/UX perfection? 🤩 Apply now for hands-on experience 👇 https://forms.gle/cTYWBvQxqu4PVNfV8'
+  }
+]

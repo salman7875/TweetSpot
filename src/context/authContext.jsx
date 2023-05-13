@@ -28,8 +28,15 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.removeItem('token')
   }
 
+  const like = async id => {
+    await fetch('http://localhost:5000/api/tweets/action/' + id, {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token }
+    })
+  }
+
   return (
-    <AuthContext.Provider value={{ currentUser, auth, token, logout }}>
+    <AuthContext.Provider value={{ currentUser, auth, token, logout, like }}>
       {children}
     </AuthContext.Provider>
   )

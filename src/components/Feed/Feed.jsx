@@ -7,9 +7,9 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
 import Comments from '../Comments/Comments'
 import { Link } from 'react-router-dom'
+import Feeds from '../../pages/Feeds'
 
 const Feed = () => {
-  const [openComment, setOpenComment] = useState(false)
   const [feed, setFeed] = useState()
   const { token, like } = useContext(AuthContext)
 
@@ -24,10 +24,6 @@ const Feed = () => {
     fetchFeed()
   }, [token])
 
-  const likeHandler = async id => {
-    await like(id)
-  }
-
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -38,35 +34,8 @@ const Feed = () => {
           <h2>Tweets</h2>
         </div>
 
-        {feed?.map(data => (
-          <div className={classes.card} key={data._id}>
-            <div className={classes.cardInfo}>
-              <img src={data.author.avatar || ''} alt={data.author.username} />
-              <Link to={`/users/${data.author._id}`}>
-                {data.author.username}
-              </Link>
-            </div>
-            <div className={classes.tweet}>
-              <p>{data.content}</p>
-            </div>
-            <div className={classes.action}>
-              <div className={classes.like}>
-                <FavoriteBorder onClick={() => likeHandler(data._id)} />
-                <span>{data.likes?.length}</span>
-              </div>
-              <div className={classes.comment}>
-                <ChatBubbleOutline
-                  onClick={() => setOpenComment(!openComment)}
-                />
-                <span>{data?.comments.length}</span>
-              </div>
-              <div className={classes.share}>
-                <Loop />
-                <span>6</span>
-              </div>
-            </div>
-            {openComment && <Comments />}
-          </div>
+        {feed?.map((data, index) => (
+          <Feeds data={data} />
         ))}
       </div>
     </div>

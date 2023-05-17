@@ -7,9 +7,8 @@ import LoopIcon from '@mui/icons-material/Loop'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import classes from './profile.module.css'
 import { Link } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../context/authContext'
-import Comments from '../Comments/Comments'
+import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 
 const Profile = () => {
   // const { currentUser } = useContext(AuthContext)
@@ -46,6 +45,7 @@ const Profile = () => {
           <KeyboardBackspaceIcon
             fontSize='large'
             className={classes.iconBack}
+            onClick={() => <Navigate to='/' />}
           />
           <div>
             <h2>{currentUser.name}</h2>

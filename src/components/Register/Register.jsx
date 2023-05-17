@@ -44,6 +44,7 @@ const Register = () => {
               name='name'
               placeholder='Enter your Full Name...'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.control}>
@@ -53,6 +54,7 @@ const Register = () => {
               name='username'
               placeholder='Enter your username...'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.control}>
@@ -62,6 +64,7 @@ const Register = () => {
               name='avatar'
               placeholder='Enter your URL...'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.control}>
@@ -71,6 +74,7 @@ const Register = () => {
               name='bgImg'
               placeholder='Enter your URL...'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.control}>
@@ -80,6 +84,7 @@ const Register = () => {
               name='bio'
               placeholder='Enter your bio...'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.control}>
@@ -89,6 +94,7 @@ const Register = () => {
               name='email'
               placeholder='Enter your Email...'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.control}>
@@ -98,6 +104,7 @@ const Register = () => {
               name='password'
               placeholder='***'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.action}>

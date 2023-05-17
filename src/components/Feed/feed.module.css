@@ -142,3 +142,11 @@
   font-size: 1.4rem;
   margin-left: 0.6rem;
 }
+
+.active {
+  display: block;
+}
+
+.inactive {
+  display: none;
+}

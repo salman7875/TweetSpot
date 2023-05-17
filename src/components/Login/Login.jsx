@@ -36,6 +36,7 @@ const Login = () => {
               name='username'
               placeholder='Enter your username...'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.control}>
@@ -45,6 +46,7 @@ const Login = () => {
               name='password'
               placeholder='******'
               onChange={changeHandler}
+              required
             />
           </div>
           <div className={classes.action}>

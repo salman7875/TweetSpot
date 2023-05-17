@@ -16,6 +16,11 @@ export const AuthContextProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(inputs)
     })
+
+    if (!res.ok) {
+      throw new Error('Something went wrong!')
+    }
+
     const data = await res.json()
     setCurrentUser(data.user)
     setToken(data.token)
@@ -29,7 +34,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   const like = async id => {
-    await fetch('http://localhost:5000/api/tweets/action/' + id, {
+    const res = await fetch('http://localhost:5000/api/tweets/action/' + id, {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + token }
     })

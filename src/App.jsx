@@ -9,19 +9,31 @@ import TweetForm from './components/TweetForm/TweetForm'
 import Root from './pages/Root'
 import Error from './pages/Error'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import SingleUser from './pages/SingleUser/SingleUser'
 import ListFollowers from './pages/ListFollower/ListFollowers'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { AuthContext } from './context/authContext'
+import { getAuthToken } from './utils/auth'
 
 const App = () => {
   const { token } = useContext(AuthContext)
 
+  const ProtectedRoute = ({ children }) => {
+    if (!token) {
+      return <Navigate to='/login' />
+    }
+    return children
+  }
+
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Root />,
+      element: (
+        <ProtectedRoute>
+          <Root />
+        </ProtectedRoute>
+      ),
       errorElement: <Error />,
       children: [
         { index: true, element: <Feed /> },

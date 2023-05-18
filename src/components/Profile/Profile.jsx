@@ -1,17 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import LoopIcon from '@mui/icons-material/Loop'
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
-import classes from './profile.module.css'
+import { KeyboardBackspace, CalendarMonth } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import ProfileTweets from '../../pages/ProfileTweets/ProfileTweets'
+import classes from './profile.module.css'
 
 const Profile = () => {
-  // const { currentUser } = useContext(AuthContext)
   const [currentUser, setCurrentUser] = useState('')
   const [tweets, setTweets] = useState()
   const token = localStorage.getItem('token')
@@ -42,7 +38,7 @@ const Profile = () => {
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <div className={classes.nav}>
-          <KeyboardBackspaceIcon
+          <KeyboardBackspace
             fontSize='large'
             className={classes.iconBack}
             onClick={() => <Navigate to='/' />}
@@ -69,18 +65,18 @@ const Profile = () => {
             <p>@{currentUser.username}</p>
 
             <div className={classes.date}>
-              <CalendarMonthIcon fontSize='medium' color='#555' />
+              <CalendarMonth fontSize='medium' color='#555' />
               <span>Joined September 2022</span>
             </div>
 
             <p className={classes.bio}>{currentUser.bio}</p>
 
             <div className={classes.followings}>
-              <Link to='/followings'>
+              <Link to={`/${currentUser._id?.toString()}/followings`}>
                 {currentUser.followings?.length}
                 <span>Followings</span>
               </Link>
-              <Link to='/followers'>
+              <Link to={`/${currentUser._id?.toString()}/followers`}>
                 {currentUser.followers?.length}
                 <span>Followers</span>
               </Link>
@@ -94,29 +90,13 @@ const Profile = () => {
           </div>
 
           {tweets?.map(tweet => (
-            <div className={classes.tweetCard} key={tweet._id}>
-              <div className={classes.cardInfo}>
-                <img src={currentUser.avatar} />
-                <p>{currentUser.name}</p>
-              </div>
-              <div className={classes.tweet}>
-                <p>{tweet.content}</p>
-              </div>
-              <div className={classes.action}>
-                <div className={classes.like}>
-                  <FavoriteBorderIcon />
-                  <span>{tweet.likes.length}</span>
-                </div>
-                <div className={classes.comment}>
-                  <ChatBubbleOutlineIcon />
-                  <span>{tweet.comments.length}</span>
-                </div>
-                <div className={classes.share}>
-                  <LoopIcon />
-                  <span>1</span>
-                </div>
-              </div>
-            </div>
+            <ProfileTweets
+              key={tweet._id}
+              id={currentUser._id}
+              name={currentUser.name}
+              avatar={currentUser.avatar}
+              tweet={tweet}
+            />
           ))}
         </div>
       </div>

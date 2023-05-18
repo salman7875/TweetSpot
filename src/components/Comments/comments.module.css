@@ -1,3 +1,13 @@
+.container {
+  max-height: 200px;
+  margin: 1.2rem 0;
+  overflow-y: scroll;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .comments {
   margin: 2rem 0;
   display: flex;
@@ -36,4 +46,29 @@
   align-self: center;
   font-size: 1.2rem;
   color: gray;
+}
+
+.input {
+  margin: 1rem 0;
+}
+
+.input > input {
+  padding: 1rem;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid #444;
+  color: #fff;
+  width: 80%;
+  outline: none;
+}
+
+.input > button {
+  width: 15%;
+  padding: 0.6rem 1rem;
+  border: none;
+  font-size: 1.6rem;
+  margin-left: 1rem;
+  background-color: rgb(84, 25, 148);
+  color: #fff;
+  cursor: pointer;
 }

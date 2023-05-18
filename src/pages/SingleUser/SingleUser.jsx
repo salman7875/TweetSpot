@@ -10,6 +10,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import { Types } from 'mongoose'
 import { AuthContext } from '../../context/authContext'
+import ProfileTweets from '../ProfileTweets/ProfileTweets'
 
 const SingleUser = () => {
   const location = useLocation()
@@ -111,55 +112,31 @@ const SingleUser = () => {
             </div>
           </div>
 
-          {tweets &&
-            tweets?.map(tweet => (
-              <div className={classes.userTweet} key={tweet._id}>
-                <div className={classes.head}>
-                  <h2>Tweet</h2>
-                </div>
-                <div className={classes.tweetCard}>
-                  <div className={classes.cardInfo}>
-                    <img src={user.avatar} alt={user.name} />
-                    <p>{user.name}</p>
-                  </div>
-                  <div className={classes.tweet}>
-                    <p>{tweet.content}</p>
-                  </div>
-                  <div className={classes.action}>
-                    <div className={classes.like}>
-                      <FavoriteBorderIcon
-                        onClick={() => likeHandler(tweet._id)}
-                      />
-                      <span>{tweet.likes.length}</span>
-                    </div>
-                    <div className={classes.comment}>
-                      <ChatBubbleOutlineIcon />
-                      <span>{tweet.comments.length}</span>
-                    </div>
-                    <div className={classes.share}>
-                      <LoopIcon />
-                      <span>1</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div className={classes.userTweet}>
+            <div className={classes.head}>
+              <h2>Tweet</h2>
+            </div>
+            {tweets?.map(tweet => (
+              <ProfileTweets
+                key={tweet._id}
+                id={user._id}
+                avatar={user.avatar}
+                name={user.name}
+                tweet={tweet}
+              />
             ))}
+          </div>
           {tweets?.length < 1 && (
-            <>
-              <div className={classes.head}>
-                <h2>Tweet</h2>
-              </div>
-              <h1
-                style={{
-                  textAlign: 'center',
-                  fontSize: '3rem',
-                  fontWeight: '300',
-                  marginBottom: '2rem'
-                }}
-              >
-                No Tweet Posted!
-              </h1>
-            </>
+            <h1
+              style={{
+                textAlign: 'center',
+                fontSize: '3rem',
+                fontWeight: '300',
+                marginBottom: '2rem'
+              }}
+            >
+              No Tweet Posted!
+            </h1>
           )}
         </div>
       )}

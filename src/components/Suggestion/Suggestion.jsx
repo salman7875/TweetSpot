@@ -7,19 +7,18 @@ import { AuthContext } from '../../context/authContext'
 
 const Suggestion = () => {
   const [suggested, setSuggested] = useState()
-  const { currentUser } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchSuggestUser = async () => {
-      const res = await fetch('http://localhost:5000/api/users')
+      const res = await fetch('http://localhost:5000/api/users', {
+        headers: { Authorization: 'Bearer ' + token }
+      })
       const data = await res.json()
-      const users = data.users.filter(
-        user => user.username !== currentUser.username
-      )
-      setSuggested(users)
+      setSuggested(data.users)
     }
     fetchSuggestUser()
-  }, [currentUser.username])
+  }, [token])
 
   return (
     <div className={classes.container}>

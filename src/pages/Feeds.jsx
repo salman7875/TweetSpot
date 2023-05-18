@@ -41,7 +41,7 @@ const Feeds = ({ data }) => {
         </div>
       </div>
       <div className={data._id === data._id ? 'active' : 'inactive'}>
-        {data._id === openComment && <Comments />}
+        {data._id === openComment && <Comments id={data._id} />}
       </div>
     </div>
   )

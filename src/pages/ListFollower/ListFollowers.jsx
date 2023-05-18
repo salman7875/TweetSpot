@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { Link, json, useLocation, useSearchParams } from 'react-router-dom'
 import classes from './ListFollowers.module.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../../context/authContext'
 
 const ListFollowers = () => {
   const [users, setUsers] = useState()

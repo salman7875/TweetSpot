@@ -39,3 +39,7 @@ a > span {
 .list:hover {
   background-color: #8f8f8f;
 }
+
+.active {
+  background-color: #8f8f8f;
+}

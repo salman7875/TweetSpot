@@ -9,12 +9,13 @@ import SearchIcon from '@mui/icons-material/Search'
 import LogoutIcon from '@mui/icons-material/Logout'
 
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
 import classes from './sidebar.module.css'
 
 const Sidebar = () => {
   const { token, logout } = useContext(AuthContext)
+  const [isActive, setIsActive] = useState('/')
   const navigate = useNavigate()
 
   const logoutHandler = () => {
@@ -26,60 +27,63 @@ const Sidebar = () => {
     <div className={classes.container}>
       <nav className={classes.sidebar}>
         <ul className={classes.lists}>
-          {!token && (
-            <>
-              <li className={classes.list}>
-                <NavLink to='/register'>
-                  <TwitterIcon fontSize='large' />
-                  <span>Register</span>
-                </NavLink>
-              </li>
-              <li className={classes.list}>
-                <NavLink to='/login'>
-                  <TwitterIcon fontSize='large' />
-                  <span>Login</span>
-                </NavLink>
-              </li>
-            </>
-          )}
-          <li className={classes.list}>
-            <NavLink to='/'>
-              <TwitterIcon fontSize='large' />
-              <span>Twitter</span>
-            </NavLink>
-          </li>
-          <li className={classes.list}>
-            <NavLink to='/'>
+          <li
+            className={`${classes.list} ${isActive === '/' && classes.active}`}
+          >
+            <NavLink to='/' onClick={() => setIsActive('/')}>
               <HomeIcon fontSize='large' />
               <span>Home</span>
             </NavLink>
           </li>
-          <li className={classes.list}>
-            <NavLink to='/search'>
+          <li
+            className={`${classes.list} ${
+              isActive === '/search' && classes.active
+            }`}
+          >
+            <NavLink to='/search' onClick={() => setIsActive('/search')}>
               <SearchIcon fontSize='large' />
               <span>Search</span>
             </NavLink>
           </li>
-          <li className={classes.list}>
+          <li
+            className={`${classes.list} ${
+              isActive === '/soon' && classes.active
+            }`}
+          >
             <NavLink to='#'>
               <NotificationsNoneIcon fontSize='large' />
               <span>Notification</span>
             </NavLink>
           </li>
-          <li className={classes.list}>
+          <li
+            className={`${classes.list} ${
+              isActive === '/soon' && classes.active
+            }`}
+          >
             <NavLink to='#'>
               <MailOutlineIcon fontSize='large' />
               <span>Message</span>
             </NavLink>
           </li>
-          <li className={classes.list}>
-            <NavLink to='/create-tweet'>
+          <li
+            className={`${classes.list} ${
+              isActive === '/create-tweet' && classes.active
+            }`}
+          >
+            <NavLink
+              to='/create-tweet'
+              onClick={() => setIsActive('/create-tweet')}
+            >
               <CreateIcon fontSize='large' />
               <span>Tweet</span>
             </NavLink>
           </li>
-          <li className={classes.list}>
-            <NavLink to='/profile'>
+          <li
+            className={`${classes.list} ${
+              isActive === '/profile' && classes.active
+            }`}
+          >
+            <NavLink to='/profile' onClick={() => setIsActive('/profile')}>
               <AccountCircleIcon fontSize='large' />
               <span>Profile</span>
             </NavLink>

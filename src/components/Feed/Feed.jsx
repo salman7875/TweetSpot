@@ -11,7 +11,7 @@ import Feeds from '../../pages/Feeds'
 
 const Feed = () => {
   const [feed, setFeed] = useState()
-  const { token, like } = useContext(AuthContext)
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchFeed = async () => {
@@ -35,7 +35,7 @@ const Feed = () => {
         </div>
 
         {feed?.map((data, index) => (
-          <Feeds data={data} />
+          <Feeds data={data} key={data._id} />
         ))}
       </div>
     </div>

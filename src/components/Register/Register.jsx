@@ -1,9 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import { useNavigate } from 'react-router-dom'
+import { redirect, useNavigate } from 'react-router-dom'
 import classes from './register.module.css'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
+import { getAuthToken } from '../../utils/auth'
 
 const Register = () => {
   const navigate = useNavigate()

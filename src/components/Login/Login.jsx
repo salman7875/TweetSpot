@@ -1,9 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import { Form, useLoaderData, useNavigate } from 'react-router-dom'
+import { Form, redirect, useLoaderData, useNavigate } from 'react-router-dom'
 import classes from './login.module.css'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
+import { getAuthToken } from '../../utils/auth'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -64,3 +65,11 @@ const Login = () => {
 }
 
 export default Login
+
+export const loader = () => {
+  const token = getAuthToken()
+  if (token) {
+    return redirect('/')
+  }
+  return null
+}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import Feed from './components/Feed/Feed'
-import Login from './components/Login/Login'
+import Login, { loader as authLoader } from './components/Login/Login'
 import Profile from './components/Profile/Profile'
 import Register from './components/Register/Register'
 import Search from './components/Search/Search'
@@ -14,7 +14,6 @@ import SingleUser from './pages/SingleUser/SingleUser'
 import ListFollowers from './pages/ListFollower/ListFollowers'
 import { useContext } from 'react'
 import { AuthContext } from './context/authContext'
-import { getAuthToken } from './utils/auth'
 
 const App = () => {
   const { token } = useContext(AuthContext)
@@ -31,7 +30,7 @@ const App = () => {
       path: '/',
       element: (
         <ProtectedRoute>
-          <Root />
+          <Root />,
         </ProtectedRoute>
       ),
       errorElement: <Error />,
@@ -45,8 +44,8 @@ const App = () => {
       ]
     },
     { path: '/create-tweet', element: <TweetForm /> },
-    { path: '/login', element: <Login /> },
-    { path: '/register', element: <Register /> }
+    { path: '/login', element: <Login />, loader: authLoader },
+    { path: '/register', element: <Register />, loader: authLoader }
   ])
   return <RouterProvider router={router} />
 }

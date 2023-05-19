@@ -1,8 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import { useNavigate, Form, redirect, useActionData } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import classes from './tweetForm.module.css'
-import { getAuthToken } from '../../utils/auth'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
 
@@ -18,7 +17,7 @@ const TweetForm = () => {
   const tweetHandler = async e => {
     e.preventDefault()
 
-    const res = await fetch('http://localhost:5000/api/tweets/create', {
+    await fetch('http://localhost:5000/api/tweets/create', {
       method: 'POST',
       body: JSON.stringify({ content: input }),
       headers: {

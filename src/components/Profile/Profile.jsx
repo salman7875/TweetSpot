@@ -1,16 +1,21 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
 import { KeyboardBackspace, CalendarMonth } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
 import ProfileTweets from '../../pages/ProfileTweets/ProfileTweets'
 import classes from './profile.module.css'
+import { month } from '../../data'
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState('')
   const [tweets, setTweets] = useState()
   const token = localStorage.getItem('token')
+  const navigate = useNavigate()
+
+  const handleGoBack = () => {
+    navigate('/')
+  }
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
@@ -34,6 +39,10 @@ const Profile = () => {
     fetchUserTweets()
   }, [currentUser, token])
 
+  const date = new Date(currentUser.createdAt)
+  const getMonth = date.getMonth()
+  const getYear = date.getFullYear()
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -41,7 +50,7 @@ const Profile = () => {
           <KeyboardBackspace
             fontSize='large'
             className={classes.iconBack}
-            onClick={() => <Navigate to='/' />}
+            onClick={handleGoBack}
           />
           <div>
             <h2>{currentUser.name}</h2>
@@ -66,7 +75,9 @@ const Profile = () => {
 
             <div className={classes.date}>
               <CalendarMonth fontSize='medium' color='#555' />
-              <span>Joined September 2022</span>
+              <span>
+                Joined {month[getMonth]} {getYear}
+              </span>
             </div>
 
             <p className={classes.bio}>{currentUser.bio}</p>

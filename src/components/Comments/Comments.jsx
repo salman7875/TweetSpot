@@ -3,12 +3,12 @@
 import { useContext, useEffect, useState } from 'react'
 import classes from './comments.module.css'
 import { AuthContext } from '../../context/authContext'
+import { format } from 'timeago.js'
 
 const Comments = ({ id }) => {
   const [comment, setComment] = useState('')
   const [user, setUser] = useState([])
-  // const { token, currentUser } = useContext(AuthContext)
-  const token = localStorage.getItem('token')
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchComments = async id => {
@@ -46,7 +46,7 @@ const Comments = ({ id }) => {
             <span>{user.user.name}</span>
             <p>{user.comment}</p>
           </div>
-          <span className={classes.date}>user.createdAt</span>
+          <span className={classes.date}>{format(user.user.createdAt)}</span>
         </div>
       ))}
       <div className={classes.input}>

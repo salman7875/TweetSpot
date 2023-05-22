@@ -1,16 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import LoopIcon from '@mui/icons-material/Loop'
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
+import { KeyboardBackspace, CalendarMonth } from '@mui/icons-material'
 import classes from './SingleUser.module.css'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
-import { Types } from 'mongoose'
 import { AuthContext } from '../../context/authContext'
 import ProfileTweets from '../ProfileTweets/ProfileTweets'
+import { month } from '../../data'
 
 const SingleUser = () => {
   const location = useLocation()
@@ -19,6 +15,11 @@ const SingleUser = () => {
   const [tweets, setTweets] = useState()
   const [follow, setFollowed] = useState(false)
   const { token } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleGoBack = () => {
+    navigate('/')
+  }
 
   // GET USER
   useEffect(() => {
@@ -66,14 +67,21 @@ const SingleUser = () => {
     }
   }
 
+  const date = new Date(user?.createdAt)
+  const getMonth = date.getMonth()
+  const getYear = date.getFullYear()
+
+  console.log(user, date)
+
   return (
     <div className={classes.container}>
       {user && (
         <div className={classes.wrapper}>
           <div className={classes.nav}>
-            <KeyboardBackspaceIcon
+            <KeyboardBackspace
               fontSize='large'
               className={classes.iconBack}
+              onClick={handleGoBack}
             />
             <div>
               <h2>{user.name}</h2>
@@ -93,8 +101,10 @@ const SingleUser = () => {
               <p>@{user.username}</p>
 
               <div className={classes.date}>
-                <CalendarMonthIcon fontSize='medium' color='#555' />
-                <span>Joined September 2022</span>
+                <CalendarMonth fontSize='medium' color='#555' />
+                <span>
+                  Joined {month[getMonth]} {getYear}
+                </span>
               </div>
 
               <p className={classes.bio}>{user.bio}</p>

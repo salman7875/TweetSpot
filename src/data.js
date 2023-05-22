@@ -50,3 +50,18 @@ export const tweets = [
       '🌎💻 A friend stealth startup is hiring for paid Product Designer interns! Are you obsessed with UI/UX perfection? 🤩 Apply now for hands-on experience 👇 https://forms.gle/cTYWBvQxqu4PVNfV8'
   }
 ]
+
+export const month = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'Autgust',
+  'September',
+  'October',
+  'November',
+  'December'
+]

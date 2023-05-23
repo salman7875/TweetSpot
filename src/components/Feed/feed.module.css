@@ -150,3 +150,11 @@
 .inactive {
   display: none;
 }
+
+@media ((min-width: 370px) and (max-width: 620px)) {
+  .wrapper {
+    overflow-x: hidden;
+    width: 42rem;
+    height: 95vh;
+  }
+}

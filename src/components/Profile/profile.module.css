@@ -253,3 +253,10 @@
   font-size: 1.4rem;
   margin-left: 0.6rem;
 }
+
+@media ((min-width: 370px) and (max-width: 620px)) {
+  .wrapper {
+    width: 420px;
+    height: 95vh;
+  }
+}

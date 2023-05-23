@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useState } from 'react'
-import { BASE_URL } from '../../utils/request'
+import { BASE_URL } from '../utils/request'
 
 export const AuthContext = createContext()
 

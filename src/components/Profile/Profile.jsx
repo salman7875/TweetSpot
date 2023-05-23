@@ -19,9 +19,12 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
-      const res = await fetch('http://localhost:5000/api/current', {
-        headers: { Authorization: 'Bearer ' + token }
-      })
+      const res = await fetch(
+        'https://tweetspot-backend.onrender.com/api/current',
+        {
+          headers: { Authorization: 'Bearer ' + token }
+        }
+      )
       const data = await res.json()
       setCurrentUser(data)
     }

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
+import { BASE_URL } from '../../utils/request'
 
 export const AuthContext = createContext()
 
@@ -11,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null)
 
   const auth = async (mode, inputs) => {
-    const res = await fetch(`http://localhost:5000/api/${mode}`, {
+    const res = await fetch(BASE_URL + `/api/${mode}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(inputs)
@@ -34,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   const like = async id => {
-    const res = await fetch('http://localhost:5000/api/tweets/action/' + id, {
+    const res = await fetch(BASE_URL + '/api/tweets/action/' + id, {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + token }
     })

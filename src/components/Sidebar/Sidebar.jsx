@@ -91,7 +91,7 @@ const Sidebar = () => {
           </li>
           {token && (
             <li className={classes.list} onClick={logoutHandler}>
-              <NavLink href='/login'>
+              <NavLink to='/login'>
                 <Logout fontSize='large' />
                 <span>Logout</span>
               </NavLink>

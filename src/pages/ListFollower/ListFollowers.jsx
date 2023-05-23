@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { Link, json, useLocation, useSearchParams } from 'react-router-dom'
 import classes from './ListFollowers.module.css'
-import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../context/authContext'
+import { useEffect, useState } from 'react'
+import { BASE_URL } from '../../utils/request'
 
 const ListFollowers = () => {
   const [users, setUsers] = useState()
@@ -12,7 +12,7 @@ const ListFollowers = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch(`http://localhost:5000/api/users/${id}/${mode}`)
+      const res = await fetch(BASE_URL + `/api/users/${id}/${mode}`)
       const data = await res.json()
       setUsers(data.users)
     }

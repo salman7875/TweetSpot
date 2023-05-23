@@ -3,6 +3,7 @@
 import { useContext, useEffect, useState } from 'react'
 import classes from './comments.module.css'
 import { AuthContext } from '../../context/authContext'
+import { BASE_URL } from '../../utils/request'
 import { format } from 'timeago.js'
 
 const Comments = ({ id }) => {
@@ -12,7 +13,7 @@ const Comments = ({ id }) => {
 
   useEffect(() => {
     const fetchComments = async id => {
-      const res = await fetch('http://localhost:5000/api/tweets/comments/' + id)
+      const res = await fetch(BASE_URL + '/api/tweets/comments/' + id)
       const data = await res.json()
       setUser(data.userComment.comments)
     }
@@ -20,7 +21,7 @@ const Comments = ({ id }) => {
   }, [id, comment])
 
   const addCommentHandler = async id => {
-    const res = await fetch('http://localhost:5000/api/tweets/' + id, {
+    const res = await fetch(BASE_URL + '/api/tweets/' + id, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import classes from './suggestion.module.css'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
+import { BASE_URL } from '../../utils/request'
 
 const Suggestion = () => {
   const [suggested, setSuggested] = useState()
@@ -11,7 +12,7 @@ const Suggestion = () => {
 
   useEffect(() => {
     const fetchSuggestUser = async () => {
-      const res = await fetch('http://localhost:5000/api/users', {
+      const res = await fetch(BASE_URL + '/api/users', {
         headers: { Authorization: 'Bearer ' + token }
       })
       const data = await res.json()

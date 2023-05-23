@@ -5,8 +5,7 @@ import classes from './feed.module.css'
 import { FavoriteBorder, Loop, ChatBubbleOutline } from '@mui/icons-material'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
-import Comments from '../Comments/Comments'
-import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../utils/request'
 import Feeds from '../../pages/Feeds'
 
 const Feed = () => {
@@ -15,7 +14,7 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchFeed = async () => {
-      const res = await fetch('http://localhost:5000/api/feed', {
+      const res = await fetch(BASE_URL + '/api/feed', {
         headers: { Authorization: 'Bearer ' + token }
       })
       const data = await res.json()

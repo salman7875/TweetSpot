@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/authContext'
 import ProfileTweets from '../ProfileTweets/ProfileTweets'
 import { month } from '../../data'
+import { BASE_URL } from '../../utils/request'
 
 const SingleUser = () => {
   const location = useLocation()
@@ -24,7 +25,7 @@ const SingleUser = () => {
   // GET USER
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch('http://localhost:5000/api/users/' + userId)
+      const res = await fetch(BASE_URL + '/api/users/' + userId)
       const data = await res.json()
       setUser(data.user)
     }
@@ -34,7 +35,7 @@ const SingleUser = () => {
   // GET USER TWEET
   useEffect(() => {
     const fetchTweets = async () => {
-      const res = await fetch('http://localhost:5000/api/tweets/' + userId)
+      const res = await fetch(BASE_URL + '/api/tweets/' + userId)
       const data = await res.json()
       setTweets(data.tweets)
     }
@@ -43,13 +44,10 @@ const SingleUser = () => {
 
   const followHandler = async () => {
     console.log(userId)
-    const res = await fetch(
-      'http://localhost:5000/api/users/follow/' + userId,
-      {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + token }
-      }
-    )
+    const res = await fetch(BASE_URL + '/api/users/follow/' + userId, {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token }
+    })
     if (res.ok) {
       console.log('Followed')
     } else {
@@ -58,7 +56,7 @@ const SingleUser = () => {
   }
 
   const likeHandler = async id => {
-    const res = await fetch('http://localhost:5000/api/tweets/action/' + id, {
+    const res = await fetch(BASE_URL + '/api/tweets/action/' + id, {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + token }
     })
@@ -70,8 +68,6 @@ const SingleUser = () => {
   const date = new Date(user?.createdAt)
   const getMonth = date.getMonth()
   const getYear = date.getFullYear()
-
-  console.log(user, date)
 
   return (
     <div className={classes.container}>

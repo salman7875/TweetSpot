@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
-import { Form, Link, useActionData } from 'react-router-dom'
-import classes from './search.module.css'
+import { Form, Link } from 'react-router-dom'
 import { useState } from 'react'
+import classes from './search.module.css'
 
 const Search = () => {
   const [input, setInput] = useState('')

@@ -1,0 +1,53 @@
+.active {
+  background-color: #8f8f8f;
+}
+
+.container {
+  position: absolute;
+  bottom: -6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 420px;
+  background-color: #000;
+  display: none;
+}
+
+.lists {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
+
+.list {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.list:hover {
+  background-color: #8f8f8f;
+}
+
+.icon {
+  color: #fff;
+}
+
+@media ((min-width: 370px) and (max-width: 620px)) {
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 7rem;
+  }
+
+  .icon {
+    font-size: 5rem;
+  }
+}

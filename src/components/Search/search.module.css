@@ -78,3 +78,28 @@
 .btnFollow:hover {
   opacity: 0.7;
 }
+
+@media ((min-width: 370px) and (max-width: 620px)) {
+  .container {
+    overflow-x: hidden;
+    width: 420px;
+    height: 95vh;
+  }
+
+  .wrapper {
+    overflow-x: hidden;
+    width: 440px;
+  }
+
+  .search > input {
+    width: 70%;
+  }
+
+  .search {
+    padding: 0;
+  }
+  .result {
+    overflow-x: hidden;
+    width: 400px;
+  }
+}

@@ -43,3 +43,9 @@ a > span {
 .active {
   background-color: #8f8f8f;
 }
+
+@media ((min-width: 370px) and (max-width: 620px)) {
+  .container {
+    display: none;
+  }
+}

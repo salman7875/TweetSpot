@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
-import TwitterIcon from '@mui/icons-material/Twitter'
-import HomeIcon from '@mui/icons-material/Home'
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
-import MailOutlineIcon from '@mui/icons-material/MailOutline'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import CreateIcon from '@mui/icons-material/Create'
-import SearchIcon from '@mui/icons-material/Search'
-import LogoutIcon from '@mui/icons-material/Logout'
+import {
+  Home,
+  NotificationsNone,
+  MailOutline,
+  AccountCircle,
+  Create,
+  Search,
+  Logout
+} from '@mui/icons-material'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useContext, useState } from 'react'
@@ -31,7 +32,7 @@ const Sidebar = () => {
             className={`${classes.list} ${isActive === '/' && classes.active}`}
           >
             <NavLink to='/' onClick={() => setIsActive('/')}>
-              <HomeIcon fontSize='large' />
+              <Home fontSize='large' />
               <span>Home</span>
             </NavLink>
           </li>
@@ -41,7 +42,7 @@ const Sidebar = () => {
             }`}
           >
             <NavLink to='/search' onClick={() => setIsActive('/search')}>
-              <SearchIcon fontSize='large' />
+              <Search fontSize='large' />
               <span>Search</span>
             </NavLink>
           </li>
@@ -51,7 +52,7 @@ const Sidebar = () => {
             }`}
           >
             <NavLink to='#'>
-              <NotificationsNoneIcon fontSize='large' />
+              <NotificationsNone fontSize='large' />
               <span>Notification</span>
             </NavLink>
           </li>
@@ -61,7 +62,7 @@ const Sidebar = () => {
             }`}
           >
             <NavLink to='#'>
-              <MailOutlineIcon fontSize='large' />
+              <MailOutline fontSize='large' />
               <span>Message</span>
             </NavLink>
           </li>
@@ -74,7 +75,7 @@ const Sidebar = () => {
               to='/create-tweet'
               onClick={() => setIsActive('/create-tweet')}
             >
-              <CreateIcon fontSize='large' />
+              <Create fontSize='large' />
               <span>Tweet</span>
             </NavLink>
           </li>
@@ -84,14 +85,14 @@ const Sidebar = () => {
             }`}
           >
             <NavLink to='/profile' onClick={() => setIsActive('/profile')}>
-              <AccountCircleIcon fontSize='large' />
+              <AccountCircle fontSize='large' />
               <span>Profile</span>
             </NavLink>
           </li>
           {token && (
             <li className={classes.list} onClick={logoutHandler}>
               <NavLink href='/login'>
-                <LogoutIcon fontSize='large' />
+                <Logout fontSize='large' />
                 <span>Logout</span>
               </NavLink>
             </li>
